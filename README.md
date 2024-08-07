@@ -1,3 +1,50 @@
+# Table of Contents
+
+- [Introduction](#introduction)
+- [Device specifications](#device-specifications)
+- [CE and UKCA Certificates](#ce-and-ukca-certificates)
+- [Risk Assessment](#risk-assessment)
+- [Document Nomenclature](#document-nomenclature)
+- [Attaching wheels](#attaching-wheels)
+- [Powering on and powering off the UGV](#powering-on-and-powering-off-the-ugv)
+- [Changing Passwords](#changing-passwords)
+      - [sudo user / SSH password](#sudo-user--ssh-password)
+        - [WiFi AP password](#wifi-ap-password)
+        - [Base Station user password](#base-station-user-password)
+        - [UGV tablet pin](#ugv-tablet-pin)
+- [Tablet use - ROS Mobile](#tablet-use---ros-mobile)
+  - [Setting up Ethernet](#setting-up-ethernet)
+- [Setting up WiFi - AP](#setting-up-wifi---ap)
+        - [Base Station](#base-station)
+        - [Tablet](#tablet)
+- [Application widget layout](#application-widget-layout)
+  - [Tablet Teleoperation](#tablet-teleoperation)
+    - [Emergency Stop](#emergency-stop)
+- [Base Station](#base-station-1)
+  - [User Information](#user-information)
+  - [Network Configuration](#network-configuration)
+  - [Installed Applications](#installed-applications)
+        - [UGV Joystick](#ugv-joystick)
+        - [UGV Keyboard](#ugv-keyboard)
+        - [Filezilla](#filezilla)
+        - [Terminator](#terminator)
+        - [VS Code](#vs-code)
+        - [Vokoscreen](#vokoscreen)
+        - [VLC](#vlc)
+        - [NMAP](#nmap)
+        - [Anydesk](#anydesk)
+        - [VNC](#vnc)
+        - [OpenSSH-server](#openssh-server)
+  - [Starting Teleoperation Session](#starting-teleoperation-session)
+        - [Control layout](#control-layout)
+        - [RVIZ](#rviz)
+  - [UGV Safe Power Down](#ugv-safe-power-down)
+- [Charging the UGV](#charging-the-ugv)
+- [Leica BLKARC](#leica-blkarc)
+      - [Downloading data](#downloading-data)
+- [Mounting Third Party Sensors](#mounting-third-party-sensors)
+- [API Usage](#api-usage)
+
 
 # Introduction  
 
@@ -35,6 +82,10 @@ https://chick92.github.io/powerbank_instructions_mk12/UKCA_MK12.pdf
 
 https://chick92.github.io/powerbank_instructions_mk12/Risk_Assessment_usage_mk12_powerbank.pdf
 
+# MSDS
+
+
+
 # Document Nomenclature
 
 Any commands that must be entered in the terminal, which are written in this document will start with a $ symbol. 
@@ -47,10 +98,9 @@ This command should be copied into a terminal window, without the $ symbol.
 
 # Attaching wheels
 
+Each UGV will come with the axles and wheels fitted, however should the user wish to remove them, it is recommended to apply loctite to each screw before inserting it. The set screws should be inserted first, and then the clamping screws to ensure a secure fitment.
+
 Each axle features 4x M3 set screw, tapped holes, and a further 4x M3 clamping, tapped holes. It is recommended to use the included 6x M3 machine screws with both the clamping holes and the set screw holes. The 2x set screw holes closest to the tyres are not used.
-
-Each UGV will come with the axles fitted, however should the user wish to remove them, it is recommended to apply loctite to each screw before inserting it. The set screws should be inserted first, and then the clamping screws to ensure a secure fitment.
-
 
 
 # Powering on and powering off the UGV
@@ -59,9 +109,8 @@ The UGV main power switch is located on the rear of the chassis. Flip it to the 
 
 If a Rajant ES1 or Rajant Cardinal is mounted to the top of the UGV, the status light will turn yellow after a few seconds, before turning white and then alternating Green, Red and Blue which indicates the radio is booting. It will then turn solid Blue, indicating it is searching for a network, and solid green when it is connected to another breadcrumb radio.
 
-It is heavily recommended to operate the UGV via mounted Rajant network, as this can provide 512bit MAC address encryption and 256 bit AES packet encryption, and a wireless range measured in KM (depending on the wireless environment). Powerbanks, shown below, can be provided by OSE or OSE distributors. The UGV can also be operated using a cellular modem or WiFi, but these have downsides - none deterministic lag, and short range respectively.
+It is heavily recommended to operate the UGV via mounted Rajant network, as this can provide 512bit MAC address encryption and 256 bit AES packet encryption, and a wireless range measured in kilometers as opposed to meters with WiFi (depending on the wireless environment). Powerbanks and Rajants, shown below, can be provided by OSE or OSE distributors. 
 
-Using a cellular modem is out of the scope of this document, however controlling the UGV via it's WiFi access point is covered below.
 
 ![alt text](powerbank_77_front.jpg "MK10 Powerbank with ES1")
 
@@ -69,14 +118,7 @@ The UGV’s WiFi Access Point (AP) will also appear after the UGV onboard comput
 
 It is essential that the user does not turn the UGV off by cutting power to it. In rare cases, this can cause file corruption on the storage media used to host the operating system of the UGV. 
 
-To turn the UGV off safely, the user has two options available:
-
-- Shutdown via ROS mobile application
-- Shutdown via SSH
-
-To turn the UGV off, the ROS mobile application can be used. Simply press and hold the shutdown enable button, and press the shutdown button. This will send a safe shutdown signal to the UGV. A reboot can be achieved with the same process, but using the reboot button instead.
-
-Shutdown and reboot via SSH can be done either from the Tablet SSH page or from a base station computer.
+To turn the UGV off safely, it is recommended to SSH into the UGV computer and execute a safe shutdown command. This can be done from either the UGV tablet, in the SSH tab, or from the terminal application on the base station laptop. 
 
 To do it with the tablet, use the SSH tab and SSH into the UGV on board computer:
 
@@ -133,7 +175,7 @@ SSH into the UGV
 
 Enter the following command:
 
-$ sudo nano /etc/netplan/………..
+$ sudo nano /etc/netplan/ose_ugv_config.yaml
 
 Use the arrow keys to navigate down to the WiFI AP section, here the SSID and password are stated in plain text. Change them as required. It is recommended you keep the cursor within the speachmarks. If you make a mistake, do not attempt to correct it. Press CTRL and X at the same time, and then N. This will exit the editor without saving the changes. 
 
@@ -148,9 +190,7 @@ You will temporarily lose communication to the UGV, this will be restored in a f
 
 ##### Base Station user password
 
-Open a terminal window (terminator icon) and enter the following:
-
-$ sudo passwd ospreysystems
+The user password can be changed in the settings menu, system settings, user.
 
 ##### UGV tablet pin
 
@@ -186,31 +226,44 @@ Under the Wi-Fi section (ignore the Wi-Fi name), ensure the IP address is set to
 
 # Setting up WiFi - AP
 
-If using the UGV’s WiFi AP, join the WiFi network using the below credentials (it is heavily recommended to utilise a Rajant mesh network, or failing that a tether system that can be provided by OSE).
+If using the UGV’s WiFi AP, join the WiFi network using the below credentials:
 
 SSID = OSE_UGV_V_***
 PWD = ospreysystems
 
-
 By default, the UGV is setup for use via Rajant or a physical tether, therefore we will need to access portainer and change the ROS master IP to reflect the fact the UGV is acting as a WiFi AP.
 
+If you have purchased a UGV with the WiFi configuration, there is no need to make the below changes. 
 
+Join the WiFi access point, or connect to the UGV via Ethernet or Rajant
 
+Open the browser and navigate to the portainer interface 
+10.42.0.1:9443 (wifi)
+192.168.1.150:9443 (rajant or ethernet)
 
+Login as admin, password = ospreysystems
 
+Navigate to Stacks in the window on the left hand side
 
+click on the UGV stack
 
+Under the Container window click on the blue text - ugv-ugv-1
 
+In the actions window at the top of the page, click stop. Then click on Duplicate / Edit
 
+Under the Advanced Container Settings tab, click on ENV
 
+for ROS_MASTER_URI enter http://10.42.0.1:11311/
+for ROS_IP enter 10.42.0.1
 
+If you wish to switch back to Ethernet / Rajant, replace the above with:
 
-This can be done by editing the docker-compose.yml file with the following values - 
+https://192.168.1.150:11311/
 
-export ROS_MASTER_URI=http://10.42.0.1:11311/
-export ROS_IP=10.42.0.1
+192.168.1.150
 
-You will then need to reflect those changes on either the base station computer or the tablet, depending on what you’re using.
+Then click Deploy the Container, and Replace.
+
 
 ##### Base Station
 
