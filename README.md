@@ -50,6 +50,8 @@
 
 This user manual is intended to give the reader comprehensive safety, and operating instructions for the OSE UGV.
 
+![alt text](new_ugv.jpg "UGV Block V")
+
 ![alt text](ugv_front.jpg "UGV Block IV")
 
 
@@ -84,7 +86,7 @@ https://chick92.github.io/powerbank_instructions_mk12/Risk_Assessment_usage_mk12
 
 # MSDS
 
-
+https://chick92.github.io/ugv_block_V_instructions/MSDS.pdf
 
 # Document Nomenclature
 
@@ -387,7 +389,7 @@ VS Code is the chosen code editor for Osprey Systems Engineering, it is included
 
 ##### Vokoscreen
 
-Vokoscreen is a Linux screen capture application.
+Vokoscreen is a Linux screen capture application. This is useful if you wish to record a video of the UGV's PoV (Point of View) camera.
 
 ##### VLC
 
@@ -418,6 +420,16 @@ Another remote desktop application, this is handy for accessing the MPC's deskto
 
 OpenSSH-server is a background SSH application that allows other computers on the LAN to SSH into the base station computer (if they have the correct credentials). IT is included here for the user’s convenience.
 
+##### Breadcrumb Commander
+
+Breadcrumb Commander (BC Commander) is the Rajant Mesh Network management software. Use of it is beyond the scope of this document, however, some useful information:
+
+Admin password:
+breadcrumb-admin
+
+Crypto Officer password:
+breadcrumb-co
+
 
 
 ## Starting Teleoperation Session
@@ -426,11 +438,11 @@ If using the Xbox series X/S controller, ensure it is powered on and paired with
 
 Ensure the UGV is powered on, and connected to the base station computer either through Rajant or WiFi.
 
-Double click on the desktop icon for either ugv joystick, or ugv keyboard, depending on what you want to use. an image viewing application will also launch, showing you the PoV camera feed from the front of the UGV.
+Click on the desktop icon for either ugv joystick, or ugv keyboard, depending on what you want to use. an image viewing application will also launch, showing you the PoV camera feed from the front of the UGV.
 
 ##### Control layout
 
-If using the XBOX controller, the control layout is as follows:
+The control layout for the XBOX controller is as follows:
 
 LB - dead man, press and hold to drive the UGV around
 Left stick - control input for driving the UGV
@@ -438,8 +450,12 @@ B - switch on lights
 X - switch off lights
 Y - switch on aux power
 A - switch off aux power
+Arrow Pad Right - Take panoramic image when BLKARC is scanning
+Arrow Pad Up - MCRS package start perimeter
+Arrow Pad Down - MCRS package stop perimeter
 
-Key bindings for the keyboard teleoperation program are displayed in the terminal window to the user. These will be re-displayed periodically.
+Note that the use of the MCRS (Maximum Coverage Radiation Survey) autonomy package is beyond the scope of this document, and requires an MPC (Modular Payload Computer) and software license. Both of which are available from OSE.
+
 
 ##### RVIZ
 
@@ -469,26 +485,53 @@ The payload computer (and any other payloads can then be powered off using the K
 
 # Charging the UGV 
 
-The charge port of the UGV is located on the rear of the device.
-
-The UGV utilises a 4S8P Li-Ion battery pack with approximately 310 Wh of storage capacity for the standard model, and 570 Wh for the long range option. This allows for approximately 36 hours of operational use in the low power mode (Leica BLKARC not attached or switched off, lights switched off and low level controller switched off). This is increased to 3 days with the long range option.
-
-It is recommended to store the UGV for extended periods of time with a battery charge state of around 50\%. It is also recommended to not operate the UGV below a 20\% battery state of charge, in order to prolong battery lifespan.
-
-To charge the device, carry out the following procedure:
-
-
-- Plug the included Lithium-Ion charger into an AC wall socket, using the appropriate included adapter for the local region
-- Lift up the dust cover of the charging receptacle, located at the rear of the UGV and insert the jack plug of the provided Litium-Ion charger into the receptacle 
-- Ensure the fault LED on the charger is not active - If this is active, please consult the distributor or the manufacturer
-- Charging is indicated by the charge LED flashing. When charging is complete, this LED will remain on.
-- Do not attempt to charge the UGV whilst it is powered on
-
-![alt text](ugv_rear.jpg "UGV rear showing charging port and power switch")
+Do not attempt to charge the UGV whilst it is powered on
 
 The charging input is NOT isolated from the battery, do not attempt to connect third party devices to this port as they will draw power even when the device is turned off. 
 
-Charge time depends on initial state of charge (SoC), however 10\% initial SoC to 80\% SoC will take approximately 8 hours. 
+Charge time depends on initial state of charge (SoC), however 10\% initial SoC to 80\% SoC will take approximately 3 hours. 
+
+The UGV utilises a 4S Li-Ion battery pack with approximately 310 Wh of storage capacity for the standard model, and 570 Wh for the long range option. This allows for approximately 36 hours of operational use in the low power mode (Leica BLKARC not attached or switched off, lights switched off and low level controller switched off). This is increased to 3 days with the long range option.
+
+It is recommended to store the UGV for extended periods of time with a battery charge state of around 50\%. It is also recommended to not operate the UGV below a 20\% battery state of charge, in order to prolong battery lifespan.
+
+The UGV charger is an ISDT 608PD, chosen for its small form factor and USB C power input. Depending on your region, the included power supply will be either a UGREEN Nexode Pro or Anker Series 7 USB C brick. It is recommended that the user reads the included instructions of both these devices separately before use.
+
+If using the UGREEN Nexode Pro, first connect the correct AC adapter to it, as shown below:
+
+![alt text](charger_plug.jpg "Nexode Pro AC adaptor")
+![alt text](charger_plug_2.jpg "Nexode pro")
+Plug the USB C brick into the AC outlet and connect the ISDT charger to it using the included USB C cable. The Power input on the ISDT charger is located at the top of the unit. If using the UGREEN Nexode Pro, connect the USB C cable to the port on the right hand side - USB C1 as shown below. There is only a single USB C port on the Anker Series 7.
+
+![alt text](charger_C1.jpg "Nexode pro USB C")
+
+![alt text](charger_usbC.jpg "Nexode USB C1")
+
+![alt text](IDST_USBC.jpg "USB C ISDT")
+Next connect the XT60 connector of UGV DC charging cable to the XT60 port on the bottom of the ISDT charger, and connect the DC barrel jack to the port on the rear of the UGV next to the power switch, as shown below, when connected the ISDT charger will display the input voltage and power from the USB C Power supply brick (20V, 65W for the Nexode Pro and 20V 45W for the Series 7) and the battery voltage of the UGV's onboard battery (between 12V and 16.8V):
+
+![alt text](charger_XT60.jpg "XT60 ISDT")
+
+![alt text](UGV_DC_jack.jpg "UGV charge input")
+The ISDT charger will arrive pre configured for use with the UGV and Powerbanks (if you have purchased Powerbanks). To start charging, long press the center button until the display changes to the charging menu:
+
+![alt text](IDST_charge_menu.jpg "Charging menu")
+
+
+
+Then short press the center button to begin charging. The charger will ask you if uou wish to perform an unbalanced charge. press the right button to confirm, as the UGV battery (and Powerbank battery) handles balancing via the built in BMS (Battery Management System). 
+
+![alt text](IDST_balance.jpg "Perfrom unbalanced charge")
+
+The charger will now charge the UGV. The USB C power supply brick can get hot under load, do not touch it. Do not charge the UGV or powerbank unattended!
+
+![alt text](IDST_charging.jpg "Charging")
+
+If you wish to adjust the charging current used, you can set this before charging by long pressing the centre button within the charging menu. The parameter that flashes will be altered with the left and right buttons. Short press the centre button to cycle through them.
+
+DO NOT change LiPo, 4S or 4.20V. This is the cell chemistry - LiPo, cell configuration - 4S and cell mav voltage - 4.20V. The charge current can be adjusted from 1A to 3A. It is best to leave it on 3A for speed of charging. If you are using a single ISDT charger for both powerbanks and the UGV, set this to 2A.
+
+
 
 # Leica BLKARC
 
