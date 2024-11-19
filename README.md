@@ -80,15 +80,15 @@ The specifications for the OSE UGV are as follows:
 - Brushless DC motors 19 Kg.cm torque per corner
 - Optional MPC (Modular Payload Computer) for high computational demand edge computing
 
-# CE and UKCA Certificates
+# CE Certificate
 
-https://chick92.github.io/powerbank_instructions_mk12/CE_MK12.pdf
+https://chick92.github.io/ugv_block_V_instructions/CE_UGV_V.pdf
 
-https://chick92.github.io/powerbank_instructions_mk12/UKCA_MK12.pdf
+
 
 # Risk Assessment
 
-https://chick92.github.io/powerbank_instructions_mk12/Risk_Assessment_usage_mk12_powerbank.pdf
+https://chick92.github.io/ugv_block_V_instructions/Risk_Assessment_usage_UGV_block_V.pdf
 
 # MSDS
 
