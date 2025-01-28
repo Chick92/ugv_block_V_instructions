@@ -83,6 +83,8 @@ The specifications for the OSE UGV are as follows:
 # CE Certificate
 
 https://chick92.github.io/ugv_block_V_instructions/CE_UGV_V.pdf
+https://chick92.github.io/ugv_block_V_instructions/IDST_CE.pdf
+https://chick92.github.io/ugv_block_V_instructions/anker_nano2_CE.pdf
 
 
 
