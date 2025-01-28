@@ -298,7 +298,7 @@ B - switch on lights
 X - switch off lights
 Y - switch on aux power
 A - switch off aux power
-Arrow Pad Right - Take panoramic image when BLKARC is scanning
+Arrow Pad Right - Take an image when BLKARC is scanning
 Arrow Pad Up - MCRS package start perimeter
 Arrow Pad Down - MCRS package stop perimeter
 
@@ -405,19 +405,8 @@ Use the Joystick to move the UGV around.
 - Lights on / off will switch the drive lights on and off
 - Leica on / off will power up and switch off the Leica BLK ARC - the Leica takes approximately 15 seconds to switch on and be ready to start a scan
 - Static pose start and end will start and finish a static pose with the BLKARC, which essentially takes a panorama image which can be inspected in the Cyclone software
-- Shutdown sends a shutdown signal to the UGV, and will safely shutdown the UGV's computer
-- ESTOP deactivates the low level controller, disabling the drive motors, leica and lights. The robot requires a reboot or start / stop off the UGV software / system daemon.
-- Mot En will enable torque on the UGV drive motors (enabled by default).
-- Mot Dis will disable torque on the UGV drive motors. This is a low power mode and will allow the wheels to freely turn (there is sufficient gearbox friction to prevent the UGV from moving unless it is on a substantial slope).
-- Shutdown enable is required to be selected before the shutdown or reboot buttons will function
-- Reboot sends a reboot command to the UGV's onboard computer
 
 
-### Emergency Stop
-
-ESTOP deactivates the low level controller, disabling the drive motors, Leica and lights. The robot requires a reboot or start / stop off the UGV software / system daemon.
-
-The easiest way to recover from an emergency stop is to power cycle the robot using the On / Off switch at the back of the robot, however if this is not accessible, the same output can be achieved through software with one of the following methods:
 
 # Switching the UGV communication link (Wifi / Ethernet)
 
